@@ -18,6 +18,7 @@
                 'time': 400,
                 'delay': 10,
                 'formatter': false,
+                'context' : 'window',
                 callback: function () {
                 }
             }, options),
@@ -29,7 +30,8 @@
             var $this = $(this),
                 counter = {
                     time: $(this).data('counterup-time') || settings.time,
-                    delay: $(this).data('counterup-delay') || settings.delay
+                    delay: $(this).data('counterup-delay') || settings.delay,
+                    context: settings.context
                 };
 
             var counterUpper = function () {
@@ -108,7 +110,11 @@
             $this.waypoint(function (direction) {
                 counterUpper();
                 this.destroy(); //-- Waypoint 3.0 version of triggerOnce
-            }, {offset: '100%'});
+            },
+            {
+                offset: '100%',
+                context: counter.context
+            });
         });
 
     };
